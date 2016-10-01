@@ -25,20 +25,28 @@ public class MainActivity extends AppCompatActivity {
     Button mBtnStartForResult;
     Button mBtnSendNot;
 
-    private static final int NOTIFY_ID = 101;
+    private static final int NOTIFY_ID = 101; //идентификатор обновления, определяемый в вашем классе для работы с уведомлением
 
+    //    Метод запускаемый при запусеке приложения
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//      Находим по ID txt_main_activity
         mainTextView = (TextView) findViewById(R.id.txt_main_activity);
+
+//        Задаем текст
         mainTextView.setText("Main Activity");
 
         mBtnFollowSecAct = (Button) findViewById(R.id.btn_followMain_activity);
+//       Определяем слушателя
         mBtnFollowSecAct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Вызов новой активности (в данном случае SecondActivity)
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+//                Стартует обьект intent
                 startActivity(intent);
             }
         });
@@ -48,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent result = new Intent(MainActivity.this, SecondActivity.class);
+//            Возвращает заданные значения в SecondActivity в MainActivity
                 startActivityForResult(result, 0);
             }
         });
@@ -56,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         mBtnSendNot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                вызываем метод  createNotification()
                 createNotification();
             }
         });
@@ -100,14 +110,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+//  задаём name данные полученные из текстового поля secondActivity
         String name = data.getStringExtra("name");
         mainTextView.setText("Your name is " + name);
     }
 
     private void createNotification() {
+//   context - обьект работающий во всём приложении, получение ссылки на обьект приложения с помошью getApplicationContext();
         Context context = getApplicationContext();
-
+//
         Intent notificationIntent = new Intent(context, MainActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(context,
                 0, notificationIntent,

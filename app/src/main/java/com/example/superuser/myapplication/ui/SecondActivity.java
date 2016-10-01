@@ -44,6 +44,7 @@ public class SecondActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
+
                 intent.putExtra("name", editText.getText().toString());
                 setResult(RESULT_OK, intent);
                 finish();
