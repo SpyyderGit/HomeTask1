@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 .getSystemService(Context.NOTIFICATION_SERVICE);
 
         Notification.Builder builder = new Notification.Builder(context);
-
+//============================================
         builder.setContentIntent(contentIntent)
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setWhen(System.currentTimeMillis())
